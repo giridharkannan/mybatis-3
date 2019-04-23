@@ -199,6 +199,7 @@ public class UnpooledDataSource implements DataSource {
   private Connection doGetConnection(Properties properties) throws SQLException {
     initializeDriver();
     Connection connection = DriverManager.getConnection(url, properties);
+    connection.setNetworkTimeout(Runnable::run, 15000);
     configureConnection(connection);
     return connection;
   }
